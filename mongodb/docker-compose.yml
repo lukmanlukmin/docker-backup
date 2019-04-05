@@ -1,0 +1,16 @@
+version: '3.0'
+services:
+  mongo-db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mongo_db_docker
+    ports:
+      # <Port exposed> : < Port running inside container>
+      - 27017:27017
+    volumes:
+      - ./persistence/data:/data/db
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    command: mongod --smallfiles --logpath=/dev/null
